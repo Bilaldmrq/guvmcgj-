@@ -5,7 +5,11 @@ Windows'ta oturum actiginda Iron Man tarzi 3D ark reaktoru acilisini
 tam ekran ve sesli oynatir, yaklasik 14 saniye sonra kendini kapatir.
 Internet gerekmez; her sey jarvis-acilis.html dosyasinin icinde.
 
-KURULUM
+EN KOLAY KURULUM (tek dosya)
+  JARVIS-KUR.bat dosyasina cift tikla. Baska hicbir dosya gerekmez.
+  Kaldirmak icin: %LOCALAPPDATA%\JarvisAcilis\KALDIR.bat
+
+KLASORDEN KURULUM
   1. Klasoru bir yere cikart (ZIP icinden calistirma).
   2. KUR.bat dosyasina cift tikla.
      - Dosyalar %LOCALAPPDATA%\JarvisAcilis klasorune kopyalanir.
