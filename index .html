@@ -31,181 +31,58 @@
   canvas{position:fixed;inset:0;pointer-events:none;}
   @media(max-width:600px){h1{font-size:1.8rem;}button{font-size:1rem;padding:10px 20px;}}
 
-  /* ===== AÇILIŞ: ARK REAKTÖRÜ / HUD ===== */
-  @property --c{syntax:'<color>';inherits:true;initial-value:#5ef2ff}
-  @property --c2{syntax:'<color>';inherits:true;initial-value:#d4fdff}
+  /* ===== AÇILIŞ: 3D ARK REAKTÖRÜ ===== */
   body.booting .content{animation:none;opacity:0}
-  #intro{
-    --c:#5ef2ff;--c2:#d4fdff;--rs:min(64vmin,360px);
-    position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    background:radial-gradient(ellipse at center,#071824 0%,#02070c 55%,#000 100%);
-    font-family:'Chakra Petch',system-ui,sans-serif;color:var(--c);overflow:hidden;cursor:pointer;
-    -webkit-tap-highlight-color:transparent;user-select:none;
-    transition:--c .9s ease,--c2 .9s ease,opacity .9s ease .35s;
-  }
-  #intro.mk{--c:#ff2d46;--c2:#ffcf5a}
-  #intro::before{content:"";position:absolute;inset:0;pointer-events:none;
-    background-image:linear-gradient(color-mix(in srgb,var(--c) 9%,transparent) 1px,transparent 1px),
-                     linear-gradient(90deg,color-mix(in srgb,var(--c) 9%,transparent) 1px,transparent 1px);
-    background-size:44px 44px;
-    -webkit-mask:radial-gradient(circle at center,#000 0%,transparent 70%);mask:radial-gradient(circle at center,#000 0%,transparent 70%);
-    animation:gridMove 12s linear infinite}
-  #intro::after{content:"";position:absolute;inset:0;pointer-events:none;
-    background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px);mix-blend-mode:overlay}
-  @keyframes gridMove{to{background-position:0 44px,44px 0}}
-  #introFx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
-  .i-flash{position:absolute;inset:0;pointer-events:none;opacity:0;z-index:4;
-    background:radial-gradient(circle at center,#fff 0%,color-mix(in srgb,var(--c2) 70%,transparent) 18%,color-mix(in srgb,var(--c) 35%,transparent) 40%,transparent 70%)}
-
-  .stage{position:relative;width:var(--rs);height:var(--rs);z-index:2;flex:none}
-  .arcwrap{position:absolute;inset:0;transition:transform 1s cubic-bezier(.7,0,.2,1),opacity 1s ease}
-  .arc{width:100%;height:100%;overflow:visible;
-    filter:drop-shadow(0 0 4px var(--c)) drop-shadow(0 0 18px color-mix(in srgb,var(--c) 70%,transparent));
-    animation:flicker 3.2s infinite steps(1)}
-  #intro.live .arc{animation:none}
-  @keyframes flicker{0%,100%{opacity:1}7%{opacity:.35}9%{opacity:1}48%{opacity:.8}50%{opacity:.25}53%{opacity:1}}
-  .arc .st{stroke:var(--c);fill:none}
-  .arc .sc{stop-color:var(--c)} .arc .sc2{stop-color:var(--c2)}
-  .arc .L{opacity:.14;transform-origin:0 0}
-  .arc .L.on{opacity:1;animation:pop .8s cubic-bezier(.2,1.6,.4,1)}
-  @keyframes pop{0%{opacity:.2;transform:scale(.82)}60%{opacity:1}100%{transform:scale(1)}}
-  .arc .spin{transform-origin:0 0;animation:spin 30s linear infinite}
-  .arc .s1{animation-duration:46s}.arc .s2{animation-duration:13s;animation-direction:reverse}
-  .arc .s3{animation-duration:70s}.arc .s4{animation-duration:24s;animation-direction:reverse}
-  .arc .s5{animation-duration:7s}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .arc .ringTxt{fill:var(--c);font:600 13px 'Chakra Petch',sans-serif;letter-spacing:6px;opacity:.75}
-  .arc .coil{stroke-opacity:.5}
-  .arc .tri{transition:transform .6s cubic-bezier(.6,-0.4,.7,1),opacity .5s}
-  .arc .tri{transform-origin:0 0}
-  .arc .triFill{fill:url(#triG);opacity:0;transition:opacity .5s}
-  #intro.mk .triFill{opacity:.9}
-  #intro.mk .tri{animation:triKick .6s cubic-bezier(.2,1.8,.4,1)}
-  @keyframes triKick{0%{transform:scale(1)}35%{transform:scale(1.22) rotate(-8deg)}100%{transform:scale(1)}}
-  #intro.charge .tri{animation:triShake .08s linear infinite}
-  @keyframes triShake{50%{transform:translate(1.5px,-1px) scale(1.03)}}
-  .arc .core{transform-origin:0 0}
-  #intro.charge .core{animation:charge 1.4s cubic-bezier(.6,0,.9,.6) forwards}
-  @keyframes charge{to{transform:scale(1.9)}}
-  #intro.logo .core{animation:idleCore 2.4s ease-in-out infinite}
-  @keyframes idleCore{50%{transform:scale(1.12)}}
-
-  .ret{position:absolute;inset:-7%;opacity:0;transform:scale(1.5) rotate(45deg);transition:transform .7s cubic-bezier(.2,1.3,.4,1),opacity .4s;pointer-events:none}
-  .ret i{position:absolute;width:16%;height:16%;border:2px solid var(--c)}
-  .ret i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0}
-  .ret i:nth-child(2){top:0;right:0;border-left:0;border-bottom:0}
-  .ret i:nth-child(3){bottom:0;left:0;border-right:0;border-top:0}
-  .ret i:nth-child(4){bottom:0;right:0;border-left:0;border-top:0}
-  #intro.scan .ret{opacity:.8;transform:scale(1.18) rotate(0);animation:hunt 1.1s ease-in-out infinite}
-  #intro.lock .ret{opacity:1;transform:scale(1);animation:blink .18s steps(1) 4}
-  #intro.lock .ret i{border-color:var(--c2)}
-  @keyframes hunt{0%,100%{translate:0 0}25%{translate:-6px 4px}50%{translate:5px -3px}75%{translate:3px 6px}}
-  @keyframes blink{50%{opacity:0}}
-
-  .hud{position:relative;z-index:2;width:min(90vw,440px);margin-top:min(4vh,28px);transition:opacity .5s}
-  .pct{display:flex;align-items:center;gap:12px;font-weight:600;letter-spacing:.2em;font-size:.8rem}
-  .pct b{font-size:1.5rem;letter-spacing:.05em;color:var(--c2);min-width:4.2ch;text-align:right;text-shadow:0 0 12px var(--c)}
-  .bar{flex:1;height:6px;border:1px solid color-mix(in srgb,var(--c) 60%,transparent);position:relative;overflow:hidden}
-  .bar span{position:absolute;inset:0;width:0;background:repeating-linear-gradient(90deg,var(--c) 0 6px,transparent 6px 8px);box-shadow:0 0 10px var(--c)}
-  .log{margin-top:12px;height:6.6em;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;
-    font:400 .78rem/1.32 'JetBrains Mono',ui-monospace,monospace;color:color-mix(in srgb,var(--c) 85%,#fff)}
-  .log div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .log .ok{color:var(--c2);font-weight:700;text-shadow:0 0 10px var(--c)}
-  .log .cur::after{content:"▌";animation:blink .6s steps(1) infinite}
-
-  .tap{position:absolute;bottom:13vh;left:0;right:0;text-align:center;z-index:2;font-weight:600;letter-spacing:.35em;font-size:.78rem;animation:breath 1.8s ease-in-out infinite}
-  @keyframes breath{50%{opacity:.25}}
-  #intro.live .tap{display:none}
-  #intro:not(.live) .hud{opacity:0}
-
-  .hc{position:absolute;z-index:2;font:400 .66rem/1.5 'JetBrains Mono',monospace;letter-spacing:.12em;opacity:.7;padding:10px 12px;pointer-events:none}
-  .hc::before{content:"";position:absolute;width:22px;height:22px;border:1px solid var(--c)}
-  .hc.tl{top:14px;left:14px}.hc.tl::before{top:0;left:0;border-right:0;border-bottom:0}
-  .hc.tr{top:14px;right:14px;text-align:right}.hc.tr::before{top:0;right:0;border-left:0;border-bottom:0}
-  .hc.bl{bottom:14px;left:14px}.hc.bl::before{bottom:0;left:0;border-right:0;border-top:0}
-  .hc.br{bottom:14px;right:14px;text-align:right}.hc.br::before{bottom:0;right:0;border-left:0;border-top:0}
-  .side{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:170px;height:46vh;overflow:hidden;
-    font:400 .62rem/1.45 'JetBrains Mono',monospace;opacity:0;transition:opacity .6s;display:flex;flex-direction:column;justify-content:flex-end;
-    -webkit-mask:linear-gradient(transparent,#000 30%);mask:linear-gradient(transparent,#000 30%)}
-  .side.l{left:4vw}.side.r{right:4vw;text-align:right}
-  #intro.live .side{opacity:.5}
-  .skip{position:absolute;right:18px;bottom:62px;z-index:5;background:none;border:1px solid color-mix(in srgb,var(--c) 50%,transparent);
-    color:var(--c);font:600 .7rem 'Chakra Petch',sans-serif;letter-spacing:.25em;padding:6px 12px;border-radius:0;box-shadow:none;cursor:pointer;
-    opacity:0;pointer-events:none;transition:opacity .4s}
-  #intro.live .skip{opacity:.65;pointer-events:auto}
-  .skip:hover{opacity:1!important}
-
-  .nm{position:absolute;left:50%;top:64%;transform:translate(-50%,-50%);z-index:3;white-space:nowrap;
-    font-weight:700;font-size:clamp(2rem,12vw,4.6rem);letter-spacing:.32em;margin-right:-.32em;line-height:1;
-    background:linear-gradient(100deg,#6d0b14 0%,#d61f33 28%,#ffd98a 46%,#fff 50%,#ffd98a 54%,#d61f33 72%,#6d0b14 100%);
-    background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;
-    filter:drop-shadow(0 0 10px color-mix(in srgb,var(--c) 70%,transparent)) blur(10px);opacity:0;
-    transition:opacity .5s ease,filter .9s ease}
-  .sub{position:absolute;left:50%;top:calc(64% + clamp(2rem,12vw,4.6rem)*.75);transform:translateX(-50%);z-index:3;white-space:nowrap;
-    display:flex;align-items:center;gap:14px;font-weight:600;font-size:clamp(.58rem,2.3vw,.85rem);letter-spacing:.5em;color:var(--c2);opacity:0;transition:opacity .8s ease .6s}
-  .sub::before,.sub::after{content:"";height:1px;width:min(16vw,110px);background:linear-gradient(90deg,transparent,var(--c));transform:scaleX(0);transition:transform 1s cubic-bezier(.2,1,.3,1) .7s}
-  .sub::before{transform-origin:right}.sub::after{background:linear-gradient(270deg,transparent,var(--c));transform-origin:left}
-  @keyframes sheen{from{background-position:100% 0}to{background-position:0 0}}
-  #intro.logo .arcwrap{transform:translateY(-17%) scale(.44)}
-  #intro.logo .ret,#intro.logo .hud,#intro.logo .side,#intro.logo .skip{opacity:0!important;pointer-events:none}
-  #intro.logo .nm{opacity:1;filter:drop-shadow(0 0 10px color-mix(in srgb,var(--c) 70%,transparent)) blur(0);animation:sheen 2.2s cubic-bezier(.5,0,.3,1) .2s forwards}
+  #intro{position:fixed;inset:0;z-index:100;background:#020407;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent;
+    user-select:none;font-family:'Chakra Petch',system-ui,sans-serif;color:#cfefff;transition:opacity 1.2s ease}
+  #intro.exit{opacity:0;pointer-events:none}
+  #ir3d{position:absolute!important;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+  #intro .vig{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.88) 100%)}
+  #intro .grain{position:absolute;inset:-50%;pointer-events:none;z-index:2;opacity:.06;animation:grain .5s steps(3) infinite;
+    background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+  @keyframes grain{33%{transform:translate(-4%,3%)}66%{transform:translate(3%,-2%)}}
+  .ibar{position:absolute;left:0;right:0;height:0;z-index:4;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:space-between;
+    padding:0 5vw;font:400 .64rem/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.2em;color:rgba(150,225,255,.55);
+    transition:height 1.2s cubic-bezier(.7,0,.2,1)}
+  .ibar.t{top:0}.ibar.b{bottom:0}
+  #intro.live .ibar{height:11vh}
+  .ibar b{color:#bff6ff;font-weight:400}
+  #iSkip{position:static;margin-left:22px;background:none;border:1px solid rgba(120,220,255,.35);color:rgba(170,235,255,.8);border-radius:0;box-shadow:none;
+    font:400 .6rem 'JetBrains Mono',monospace;letter-spacing:.25em;padding:6px 10px;cursor:pointer;animation:none}
+  #iSkip:hover{border-color:#7ff3ff;color:#fff}
+  .iflash{position:absolute;inset:0;z-index:5;background:#fff;opacity:0;pointer-events:none}
+  .tap{position:absolute;left:50%;bottom:13vh;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:16px;
+    font-weight:600;font-size:.7rem;letter-spacing:.7em;margin-right:-.7em;color:rgba(190,240,255,.8);transition:opacity .6s}
+  .tap i{width:44px;height:44px;border:1px solid rgba(120,230,255,.55);border-radius:50%;position:relative;animation:ping 2.2s ease-out infinite}
+  .tap i::after{content:"";position:absolute;inset:16px;border-radius:50%;background:#9ff6ff;box-shadow:0 0 12px #5ef2ff,0 0 28px #5ef2ff}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(94,242,255,.45)}100%{box-shadow:0 0 0 28px rgba(94,242,255,0)}}
+  #intro.live .tap{opacity:0;pointer-events:none}
+  .ilogo{position:absolute;left:0;right:0;top:64%;transform:translateY(-50%);z-index:3;text-align:center;pointer-events:none}
+  .ilogo .nm{display:inline-block;font-weight:700;line-height:1;font-size:clamp(2.6rem,14vw,6.4rem);letter-spacing:.9em;margin-right:-.9em;
+    background:linear-gradient(100deg,#4b535c 0%,#aab4be 28%,#fff 45%,#8ff5ff 50%,#fff 55%,#aab4be 72%,#4b535c 100%);
+    background-size:280% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;
+    opacity:0;filter:blur(14px);transition:opacity 1.2s ease,filter 1.4s ease,letter-spacing 2.8s cubic-bezier(.16,1,.3,1),margin 2.8s cubic-bezier(.16,1,.3,1)}
+  .ilogo .sub{margin-top:2.6vh;display:flex;justify-content:center;align-items:center;gap:16px;font-weight:600;font-size:clamp(.55rem,2.1vw,.78rem);
+    letter-spacing:.65em;color:rgba(160,235,255,.85);opacity:0;transition:opacity 1.2s ease 1s}
+  .ilogo .sub::before,.ilogo .sub::after{content:"";height:1px;width:min(14vw,110px);background:linear-gradient(90deg,transparent,#5ef2ff);
+    transform:scaleX(0);transform-origin:right;transition:transform 1.4s cubic-bezier(.16,1,.3,1) 1.1s}
+  .ilogo .sub::after{background:linear-gradient(270deg,transparent,#5ef2ff);transform-origin:left}
+  #intro.logo .nm{opacity:1;filter:blur(0) drop-shadow(0 0 22px rgba(94,242,255,.35));letter-spacing:.3em;margin-right:-.3em;animation:sheen 2.8s cubic-bezier(.5,0,.25,1) .5s forwards}
   #intro.logo .sub{opacity:1}
   #intro.logo .sub::before,#intro.logo .sub::after{transform:scaleX(1)}
-  #intro.exit{opacity:0;pointer-events:none}
-  #intro.exit .arcwrap{transform:scale(9);opacity:0;transition:transform 1.2s cubic-bezier(.7,0,.3,1),opacity .8s ease .4s}
-  #intro.exit .nm,#intro.exit .sub{opacity:0;transition:opacity .5s}
-  /* vizör: kask kapanma efekti */
-  .lid{position:absolute;left:0;right:0;height:50%;z-index:6;background:linear-gradient(#0b0d10,#15181d);pointer-events:none;
-    transition:transform .32s cubic-bezier(.8,0,.6,1)}
-  .lid.t{top:0;transform:translateY(-101%);border-bottom:2px solid var(--c);box-shadow:0 6px 30px color-mix(in srgb,var(--c) 60%,transparent)}
-  .lid.b{bottom:0;transform:translateY(101%);border-top:2px solid var(--c);box-shadow:0 -6px 30px color-mix(in srgb,var(--c) 60%,transparent)}
-  #intro.visor .lid{transform:none}
-  @media(max-width:820px){.side{display:none}}
-  @media(max-width:600px){.hc{font-size:.56rem}.hc.bl,.hc.br{display:none}.skip{bottom:20px}}
-  @media(max-height:560px){.log{height:4em}.tap{bottom:6vh}}
+  @keyframes sheen{from{background-position:100% 0}to{background-position:0 0}}
+  @media(max-width:600px){.ibar{font-size:.52rem;letter-spacing:.12em}#iSkip{margin-left:10px}}
 </style>
 </head>
 <body class="booting">
-<div id="intro" role="button" tabindex="0" aria-label="Sistemi başlatmak için dokun">
-  <canvas id="introFx"></canvas>
-  <div class="i-flash" id="iFlash"></div>
-  <div class="hc tl">J.A.R.V.I.S. // MARK ∞<br>SİSTEM: <span id="iState">UYKU MODU</span></div>
-  <div class="hc tr"><span id="iClock">--:--:--</span><br>İRTİFA 0000 M</div>
-  <div class="hc bl">ZIRH: <span id="iArmor">BEKLEMEDE</span><br>REPULSÖR: <span id="iRep">KAPALI</span></div>
-  <div class="hc br">B INDUSTRIES<br>BUILD 3000</div>
-  <div class="side l" id="sideL"></div>
-  <div class="side r" id="sideR"></div>
-
-  <div class="stage">
-    <div class="arcwrap">
-      <svg class="arc" viewBox="-215 -215 430 430" aria-hidden="true">
-        <defs>
-          <radialGradient id="coreG"><stop offset="0" stop-color="#fff"/><stop offset=".3" class="sc2"/><stop offset=".65" class="sc" stop-opacity=".8"/><stop offset="1" class="sc" stop-opacity="0"/></radialGradient>
-          <radialGradient id="triG"><stop offset="0" stop-color="#fff"/><stop offset=".45" class="sc2"/><stop offset="1" class="sc" stop-opacity=".25"/></radialGradient>
-          <path id="txtRing" d="M0,-199 A199,199 0 1,1 -.1,-199"/>
-        </defs>
-        <g class="L"><g class="spin s1"><text class="ringTxt"><textPath href="#txtRing">ARK REAKTÖRÜ · MARK ∞ · J.A.R.V.I.S. · ÇIKIŞ 3 GW · ARK REAKTÖRÜ · MARK ∞ · J.A.R.V.I.S. · ÇIKIŞ 3 GW ·</textPath></text></g></g>
-        <g class="L"><g class="spin s2"><circle r="182" class="st" stroke-width="3" stroke-dasharray="130 26 16 26"/></g></g>
-        <g class="L"><g class="spin s3"><circle r="166" class="st" stroke-width="10" stroke-dasharray="1.6 15.78" opacity=".75"/></g></g>
-        <g class="L"><circle r="148" class="st" stroke-width="2" opacity=".6"/><circle r="106" class="st" stroke-width="4"/></g>
-        <g class="L"><g class="spin s4"><circle r="127" class="st coil" stroke-width="34" stroke-dasharray="64.4 15.4"/><circle r="127" class="st" stroke-width="2" stroke-dasharray="64.4 15.4"/></g></g>
-        <g class="L"><g class="spin s5"><circle r="90" class="st" stroke-width="2" stroke-dasharray="5 9"/></g></g>
-        <g class="L core"><circle r="66" fill="url(#coreG)"/></g>
-        <g class="L tri"><path class="triFill" d="M0,52 L-45,-26 L45,-26 Z"/><path d="M0,80 L-69,-40 L69,-40 Z" class="st" stroke-width="7" stroke-linejoin="round"/><path d="M0,52 L-45,-26 L45,-26 Z" class="st" stroke-width="2" opacity=".7"/></g>
-      </svg>
-      <div class="ret"><i></i><i></i><i></i><i></i></div>
-    </div>
-    <div class="nm" id="nm">BİLAL</div>
-    <div class="sub">MARK ∞ · ÇEVRİMİÇİ</div>
-  </div>
-
-  <div class="hud">
-    <div class="pct">GÜÇ <b id="iPct">000%</b><div class="bar"><span id="iBar"></span></div></div>
-    <div class="log" id="iLog"></div>
-  </div>
-  <div class="tap">[ SİSTEMİ BAŞLATMAK İÇİN DOKUN ]</div>
-  <button class="skip" id="iSkip" type="button">ATLA ›</button>
-  <div class="lid t"></div><div class="lid b"></div>
+<div id="intro" role="button" tabindex="0" aria-label="Başlatmak için dokun">
+  <canvas id="ir3d"></canvas>
+  <div class="vig"></div><div class="grain"></div>
+  <div class="ilogo"><div class="nm">BİLAL</div><div class="sub">MARK ∞ · ÇEVRİMİÇİ</div></div>
+  <div class="tap"><i></i>BAŞLAT</div>
+  <div class="ibar t"><span>J.A.R.V.I.S.</span><span id="iClock">--:--:--</span></div>
+  <div class="ibar b"><span id="iMsg">&nbsp;</span><span>GÜÇ <b id="iPct">000</b>%<button id="iSkip" type="button">ATLA ›</button></span></div>
+  <div class="iflash" id="iFlash"></div>
 </div>
 <div class="bg" id="bg"></div>
 <div class="overlay"></div>
@@ -223,118 +100,164 @@
 </div>
 <canvas id="canvas"></canvas>
 <audio id="music" src="https://dl.dropboxusercontent.com/scl/fi/k7grk2yq3y28c8n2l9bp9/Sezen-Aksu-Kaç-n-Kuras-.mp3?rlkey=6b2z5k1xzox8y9f2m9z0d6nuh&dl=0"></audio>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script>
-// ===== AÇILIŞ: Iron Man tarzı ark reaktörü boot sekansı =====
-(()=>{
-const intro=document.getElementById('intro');
-const fx=document.getElementById('introFx'),g=fx.getContext('2d');
-const $=id=>document.getElementById(id);
-const layers=[...intro.querySelectorAll('.arc .L')];
-const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-let started=false,done=false,stopHum=()=>{};
+// 3D yüklenemezse açılış kendini kaldırır, sayfa yine açılır
+window.__introKill=function(){var i=document.getElementById('intro');if(i)i.remove();document.body.classList.remove('booting');};
+setTimeout(function(){if(!window.__introReady)window.__introKill();},10000);
+</script>
+<script type="module">
+// ===== AÇILIŞ: Three.js ile gerçek zamanlı 3D ark reaktörü =====
+const intro=document.getElementById('intro'),$=id=>document.getElementById(id);
+let THREE,EffectComposer,RenderPass,UnrealBloomPass,OutputPass,RoomEnvironment;
+try{
+  THREE=await import('three');
+  ({EffectComposer}=await import('three/addons/postprocessing/EffectComposer.js'));
+  ({RenderPass}=await import('three/addons/postprocessing/RenderPass.js'));
+  ({UnrealBloomPass}=await import('three/addons/postprocessing/UnrealBloomPass.js'));
+  ({OutputPass}=await import('three/addons/postprocessing/OutputPass.js'));
+  ({RoomEnvironment}=await import('three/addons/environments/RoomEnvironment.js'));
+}catch(e){window.__introKill();throw e;}
 
-// --- Ses: tamamen Web Audio ile sentezleniyor (dosya yok) ---
+// --- Sahne ---
+const cv=$('ir3d');let renderer;
+try{renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,powerPreference:'high-performance'});}catch(e){window.__introKill();throw e;}
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x020407);
+const pmrem=new THREE.PMREMGenerator(renderer);
+scene.environment=pmrem.fromScene(new RoomEnvironment(renderer),.04).texture;
+const camera=new THREE.PerspectiveCamera(35,1,.05,200);
+
+const steel=new THREE.MeshStandardMaterial({color:0xaab3bd,metalness:1,roughness:.26,envMapIntensity:.32});
+const gunmetal=new THREE.MeshStandardMaterial({color:0x2b3138,metalness:1,roughness:.42,envMapIntensity:.22});
+const copper=new THREE.MeshStandardMaterial({color:0xd27a3e,metalness:1,roughness:.3,envMapIntensity:.3});
+const glow=new THREE.MeshStandardMaterial({color:0x000000,emissive:0x45e8ff,emissiveIntensity:0,toneMapped:false});
+const coreM=new THREE.MeshStandardMaterial({color:0x000000,emissive:0xd8fdff,emissiveIntensity:0,toneMapped:false});
+
+const R=new THREE.Group();scene.add(R);
+const add=(geo,mat,f)=>{const m=new THREE.Mesh(geo,mat);f&&f(m);R.add(m);return m;};
+const ring=(r,t,mat,z=0,seg=160)=>add(new THREE.TorusGeometry(r,t,24,seg),mat,m=>m.position.z=z);
+// gövde
+add(new THREE.CylinderGeometry(3.45,3.45,.5,128),gunmetal,m=>{m.rotation.x=Math.PI/2;m.position.z=-.45;});
+ring(3.32,.17,steel,0);ring(3.02,.06,steel,.12);ring(2.98,.05,gunmetal,-.05);
+for(let i=0;i<16;i++){const a=i/16*Math.PI*2;add(new THREE.CylinderGeometry(.07,.07,.12,16),steel,m=>{m.rotation.x=Math.PI/2;m.position.set(Math.cos(a)*3.17,Math.sin(a)*3.17,.16);});}
+// bobin halkasının altındaki ışık (sadece aralardan sızar)
+add(new THREE.RingGeometry(1.75,2.75,128),glow,m=>m.position.z=-.19);
+// 10 bakır bobin
+for(let i=0;i<10;i++){const g=new THREE.Group();g.rotation.z=i/10*Math.PI*2;R.add(g);
+  const core=new THREE.Mesh(new THREE.BoxGeometry(.42,.95,.36),gunmetal);core.position.y=2.25;g.add(core);
+  for(let k=0;k<9;k++){const w=new THREE.Mesh(new THREE.TorusGeometry(.29,.042,10,28),copper);w.rotation.x=Math.PI/2;w.scale.set(1,1,.78);w.position.y=1.86+k*.098;g.add(w);}
+  const cap=new THREE.Mesh(new THREE.BoxGeometry(.66,.07,.46),steel);cap.position.y=2.78;g.add(cap);
+  const cap2=cap.clone();cap2.position.y=1.72;g.add(cap2);}
+// iç halka + ışık halkası
+ring(1.56,.12,steel,.05);ring(1.36,.035,glow,.08);ring(1.22,.07,gunmetal,0);
+for(let i=0;i<3;i++){const a=i/3*Math.PI*2+Math.PI/2;add(new THREE.BoxGeometry(.12,.5,.12),steel,m=>{m.rotation.z=a-Math.PI/2;m.position.set(Math.cos(a)*1.38,Math.sin(a)*1.38,.02);});}
+// üçgen (Mark VI)
+add(new THREE.TorusGeometry(1.08,.085,12,3),steel,m=>{m.rotation.z=-Math.PI/2;m.position.z=.12;});
+const tri=add(new THREE.TorusGeometry(.92,.06,12,3),glow,m=>{m.rotation.z=-Math.PI/2;m.position.z=.18;});
+// çekirdek
+const core=add(new THREE.SphereGeometry(.5,48,24),coreM,m=>{m.scale.z=.35;m.position.z=.1;});
+const light=new THREE.PointLight(0x7ff6ff,0,0,2);light.position.z=.9;R.add(light);
+const rim=new THREE.DirectionalLight(0x9fc4ff,.5);rim.position.set(-6,7,6);scene.add(rim);
+
+// kıvılcımlar
+const N=700,pPos=new Float32Array(N*3),pVel=new Float32Array(N*3);let pLife=0;
+const pGeo=new THREE.BufferGeometry();pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+const pMat=new THREE.PointsMaterial({color:0x9ff7ff,size:.05,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false});
+R.add(new THREE.Points(pGeo,pMat));
+function sparks(){for(let i=0;i<N;i++){pPos[i*3]=pPos[i*3+1]=0;pPos[i*3+2]=.3;const a=Math.random()*Math.PI*2,z=Math.random()*2-1,s=.06+Math.random()*.22,r=Math.sqrt(1-z*z);
+  pVel[i*3]=Math.cos(a)*r*s;pVel[i*3+1]=Math.sin(a)*r*s;pVel[i*3+2]=Math.abs(z)*s*.6;}pLife=1;}
+
+const composer=new EffectComposer(renderer);composer.addPass(new RenderPass(scene,camera));
+const bloom=new UnrealBloomPass(new THREE.Vector2(1,1),.3,.4,.9);composer.addPass(bloom);composer.addPass(new OutputPass());
+function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);composer.setSize(w,h);bloom.resolution.set(w/2,h/2);camera.aspect=w/h;camera.updateProjectionMatrix();}
+resize();addEventListener('resize',resize);
+
+// --- Durum ve tween ---
+const S={power:0,camT:0,dolly:0,logo:0,mode:'boot'};
+const tweens=[],eio=e=>e<.5?4*e*e*e:1-Math.pow(-2*e+2,3)/2,ein=e=>e*e*e;
+const tween=(k,to,dur,ease=eio)=>new Promise(res=>tweens.push({k,from:S[k],to,dur,t0:performance.now(),ease,res}));
+const lerp=(a,b,t)=>a+(b-a)*t,A=new THREE.Vector3(8.2,3.8,10.5),F=new THREE.Vector3(0,0,15),tmp=new THREE.Vector3();
+let flick=1,running=true,triA=0,lastT=0;
+const clk=new THREE.Clock();
+function frame(){if(!running)return;requestAnimationFrame(frame);const t=clk.getElapsedTime(),now=performance.now();
+  for(let i=tweens.length-1;i>=0;i--){const w=tweens[i],p=Math.min((now-w.t0)/w.dur,1);S[w.k]=lerp(w.from,w.to,w.ease(p));if(p>=1){tweens.splice(i,1);w.res();}}
+  const P=S.power*flick*(1+Math.sin(t*31)*.015);
+  glow.emissiveIntensity=P*1.05;coreM.emissiveIntensity=.15+P*3.4;light.intensity=P*9;bloom.strength=.15+Math.min(P,2.4)*.3;
+  const dt=t-lastT;lastT=t;if(S.mode==='logo')triA*=.9;else if(S.power>1.05)triA+=dt*(S.power-1)*7;
+  tri.rotation.z=-Math.PI/2+triA;
+  if(S.mode==='logo'){
+    const w=innerWidth,h=innerHeight,D=Math.min(h*.26,w*.46),d=7.3*h/(.6306*D),vis=.6306*d;
+    R.position.y=vis*.16;camera.fov=35;camera.position.set(Math.sin(t*.35)*.6,Math.cos(t*.3)*.3,d*(1-S.logo*.06));camera.lookAt(0,0,0);
+    R.rotation.y=Math.sin(t*.4)*.12;R.rotation.x=Math.cos(t*.33)*.06;
+  }else{
+    tmp.lerpVectors(A,F,S.camT);const o=(1-S.camT)*.5;tmp.x+=Math.sin(t*.25)*o;tmp.y+=Math.cos(t*.2)*o;
+    tmp.z=lerp(tmp.z,.75,S.dolly);tmp.x*=1-S.dolly;tmp.y*=1-S.dolly;
+    camera.position.copy(tmp);camera.fov=lerp(35,78,S.dolly*S.dolly);camera.lookAt(0,0,0);
+    if(S.dolly>0)camera.rotation.z=S.dolly*S.dolly*.6;
+  }
+  camera.updateProjectionMatrix();
+  if(pLife>0){pLife-=.006;for(let i=0;i<N*3;i++){pPos[i]+=pVel[i];pVel[i]*=.985;}pGeo.attributes.position.needsUpdate=true;pMat.opacity=Math.max(pLife,0);}
+  composer.render();}
+frame();window.__introReady=true;
+
+// --- Ses (Web Audio sentezi) ---
 let AC,master;
-function initAudio(){try{AC=new(window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=.8;master.connect(AC.destination);}catch(e){}}
-function tone(f,d,v,type='square',f2){if(!AC)return;const t=AC.currentTime,o=AC.createOscillator(),a=AC.createGain();o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);a.gain.setValueAtTime(v,t);a.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(a).connect(master);o.start(t);o.stop(t+d+.05);}
-const beep=(f=1500)=>tone(f,.05,.025);
-const thump=(v=.8)=>tone(120,.28,v,'sine',36);
-function noise(d,v,f0,f1){if(!AC)return;const t=AC.currentTime,len=AC.sampleRate*d,b=AC.createBuffer(1,len,AC.sampleRate),ch=b.getChannelData(0);for(let i=0;i<len;i++)ch[i]=Math.random()*2-1;
-  const s=AC.createBufferSource(),fl=AC.createBiquadFilter(),a=AC.createGain();s.buffer=b;fl.type='lowpass';fl.frequency.setValueAtTime(f0,t);fl.frequency.exponentialRampToValueAtTime(f1,t+d);
+function initAudio(){try{AC=new(window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=.85;master.connect(AC.destination);}catch(e){}}
+function tone(f,d,v,type='sine',f2){if(!AC)return;const t=AC.currentTime,o=AC.createOscillator(),a=AC.createGain();o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);
+  a.gain.setValueAtTime(v,t);a.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(a).connect(master);o.start(t);o.stop(t+d+.05);}
+function noise(d,v,f0,f1,type='lowpass'){if(!AC)return;const t=AC.currentTime,len=AC.sampleRate*d|0,b=AC.createBuffer(1,len,AC.sampleRate),ch=b.getChannelData(0);for(let i=0;i<len;i++)ch[i]=Math.random()*2-1;
+  const s=AC.createBufferSource(),fl=AC.createBiquadFilter(),a=AC.createGain();s.buffer=b;fl.type=type;fl.frequency.setValueAtTime(f0,t);fl.frequency.exponentialRampToValueAtTime(f1,t+d);
   a.gain.setValueAtTime(v,t);a.gain.exponentialRampToValueAtTime(.0001,t+d);s.connect(fl).connect(a).connect(master);s.start(t);}
+const zap=()=>{noise(.08,.35,6000,1500,'bandpass');tone(60,.09,.18,'sawtooth');};
 function hum(d){if(!AC)return()=>{};const t=AC.currentTime,a=AC.createGain(),fl=AC.createBiquadFilter(),o1=AC.createOscillator(),o2=AC.createOscillator();
-  o1.type='sawtooth';o2.type='sine';o1.frequency.setValueAtTime(42,t);o1.frequency.exponentialRampToValueAtTime(210,t+d);o2.frequency.setValueAtTime(84,t);o2.frequency.exponentialRampToValueAtTime(1260,t+d);
-  fl.type='lowpass';fl.Q.value=7;fl.frequency.setValueAtTime(180,t);fl.frequency.exponentialRampToValueAtTime(3200,t+d);
-  a.gain.setValueAtTime(.0001,t);a.gain.exponentialRampToValueAtTime(.08,t+1.2);a.gain.linearRampToValueAtTime(.12,t+d);
+  o1.type='sawtooth';o2.type='sine';o1.frequency.setValueAtTime(40,t);o1.frequency.exponentialRampToValueAtTime(110,t+d);o2.frequency.setValueAtTime(80,t);o2.frequency.exponentialRampToValueAtTime(660,t+d);
+  fl.type='lowpass';fl.Q.value=5;fl.frequency.setValueAtTime(160,t);fl.frequency.exponentialRampToValueAtTime(1800,t+d);
+  a.gain.setValueAtTime(.0001,t);a.gain.exponentialRampToValueAtTime(.1,t+1.4);
   o1.connect(fl);o2.connect(fl);fl.connect(a).connect(master);o1.start(t);o2.start(t);
-  let stopped=false;return()=>{if(stopped)return;stopped=true;const n=AC.currentTime;a.gain.cancelScheduledValues(n);a.gain.setValueAtTime(Math.max(a.gain.value,.0002),n);a.gain.exponentialRampToValueAtTime(.0001,n+.3);o1.stop(n+.35);o2.stop(n+.35);};}
+  let s=false;return()=>{if(s)return;s=true;const n=AC.currentTime;a.gain.cancelScheduledValues(n);a.gain.setValueAtTime(Math.max(a.gain.value,.0002),n);a.gain.exponentialRampToValueAtTime(.0001,n+.4);o1.stop(n+.45);o2.stop(n+.45);};}
 const buzz=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
 
-// --- HUD yardımcıları ---
+// --- HUD metni ---
 const pad=n=>String(n).padStart(2,'0');
 const clock=setInterval(()=>{const d=new Date();$('iClock').textContent=pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());},250);
-const hex=n=>Array.from({length:n},()=>'0123456789ABCDEF'[Math.random()*16|0]).join('');
-const sideTick=setInterval(()=>{if(!started)return;[$('sideL'),$('sideR')].forEach(el=>{const d=document.createElement('div');const v=Math.random();
-  d.textContent='0x'+hex(4)+' '+'▮'.repeat(1+v*6|0).padEnd(7,'▯')+' '+(v*100).toFixed(1);el.appendChild(d);if(el.children.length>40)el.firstChild.remove();});},90);
-
-const step=async ms=>{await sleep(ms);if(done)throw 0;};
-async function typeLine(txt,cls){const log=$('iLog'),d=document.createElement('div');if(cls)d.className=cls;d.classList.add('cur');log.appendChild(d);
-  if(log.children.length>5)log.firstChild.remove();beep(1800);
-  for(let i=1;i<=txt.length;i++){d.textContent=txt.slice(0,i);await step(18);}d.classList.remove('cur');}
-
-const DEC='ABCDEFGHIJKLMNOPRSTUVYZ0123456789#$%&*<>/';
-function decode(el,final,dur){const t0=performance.now();return new Promise(res=>{(function f(now){const p=Math.min((now-t0)/dur,1),k=Math.floor(p*final.length);
-  el.textContent=final.slice(0,k)+Array.from(final.slice(k),c=>c===' '?' ':DEC[Math.random()*DEC.length|0]).join('');
-  if(p<1)requestAnimationFrame(f);else{el.textContent=final;res();}})(t0);});}
-
-function power(dur){const t0=performance.now();return new Promise(res=>{(function f(now){if(done)return res();let p=Math.min((now-t0)/dur,1);p=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
-  const v=Math.round(p*100);$('iPct').textContent=String(v).padStart(3,'0')+'%';$('iBar').style.width=v+'%';
-  if(p<1)requestAnimationFrame(f);else res();})(t0);});}
-
-// --- Şok dalgası + kıvılcımlar ---
-let parts=[],rings=[],fxOn=true;
-function sizeFx(){fx.width=innerWidth*devicePixelRatio;fx.height=innerHeight*devicePixelRatio;g.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);}
-sizeFx();addEventListener('resize',sizeFx);
-function center(){const r=intro.querySelector('.stage').getBoundingClientRect();return[r.left+r.width/2,r.top+r.height/2];}
-function shock(){const[cx,cy]=center(),cols=['#ff2d46','#ffcf5a','#fff3d1','#ff7a3d'];
-  rings.push({x:cx,y:cy,r:20,v:14,a:1,w:6},{x:cx,y:cy,r:10,v:9,a:.8,w:2});
-  for(let i=0;i<220;i++){const an=Math.random()*Math.PI*2,sp=2+Math.random()*13;parts.push({x:cx,y:cy,vx:Math.cos(an)*sp,vy:Math.sin(an)*sp,l:1,d:.008+Math.random()*.02,c:cols[i%4],s:1+Math.random()*2.5});}}
-(function loop(){if(!fxOn)return;g.clearRect(0,0,innerWidth,innerHeight);g.globalCompositeOperation='lighter';
-  rings.forEach(r=>{r.r+=r.v;r.v*=.985;r.a-=.014;g.strokeStyle=`rgba(255,120,90,${Math.max(r.a,0)})`;g.lineWidth=r.w;g.shadowBlur=24;g.shadowColor='#ff2d46';g.beginPath();g.arc(r.x,r.y,r.r,0,7);g.stroke();});
-  g.shadowBlur=0;parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vx*=.97;p.vy*=.97;p.l-=p.d;g.globalAlpha=Math.max(p.l,0);g.fillStyle=p.c;g.fillRect(p.x,p.y,p.s,p.s);
-    g.globalAlpha=Math.max(p.l,0)*.35;g.fillRect(p.x-p.vx*2,p.y-p.vy*2,p.s,p.s);});
-  g.globalAlpha=1;g.globalCompositeOperation='source-over';rings=rings.filter(r=>r.a>0);parts=parts.filter(p=>p.l>0);requestAnimationFrame(loop);})();
-const flash=(o=.95,d=800)=>$('iFlash').animate([{opacity:o},{opacity:0}],{duration:d,easing:'ease-out'});
+let msgTok=0;async function msg(txt){const my=++msgTok,el=$('iMsg');for(let i=1;i<=txt.length;i++){if(my!==msgTok)return;el.textContent=txt.slice(0,i);await sleep(22);}}
+const pctTick=setInterval(()=>{$('iPct').textContent=String(Math.round(Math.min(S.power,1)*100)).padStart(3,'0');},50);
 
 // --- Sekans ---
-const LINES=[['> J.A.R.V.I.S. çevrimiçi'],['> Ark reaktörü ateşleniyor…'],['> Repulsörler kalibre ediliyor…','rep'],['> Zırh bütünlüğü: %100','armor'],
-  ['> Biyometrik tarama…','scan'],['> Kimlik doğrulandı: BİLAL','lock'],['> Hoş geldiniz, efendim.','ok']];
-
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+let started=false,done=false,stopHum=()=>{};
+const step=async ms=>{await sleep(ms);if(done)throw 0;};
 async function boot(){
   if(started)return;started=true;initAudio();
-  // vizör kapanır -> açılır, HUD yanar
-  intro.classList.add('visor');noise(.25,.5,3000,200);tone(160,.18,.25,'square',60);buzz(40);
-  await sleep(420);if(done)return;intro.classList.add('live');intro.classList.remove('visor');
-  $('iState').textContent='BAŞLATILIYOR';stopHum=hum(5.2);
-  layers.forEach((l,i)=>setTimeout(()=>{if(done)return;l.classList.add('on');tone(400+i*160,.07,.03,'triangle');},120+i*380));
+  intro.classList.add('live');noise(.3,.45,2500,150);tone(150,.2,.22,'square',55);buzz(30);
   try{
-    const pw=power(5200);
-    for(const[t,c]of LINES){
-      if(c==='scan')intro.classList.add('scan');
-      if(c==='rep')$('iRep').textContent='HAZIR';
-      if(c==='armor')$('iArmor').textContent='AKTİF';
-      if(c==='lock'){intro.classList.remove('scan');intro.classList.add('lock');tone(2200,.15,.05);buzz([20,30,20]);}
-      await typeLine(t,c==='ok'?'ok':'');await step(c==='ok'?0:160);
-    }
-    await pw;if(done)return;
-    stopHum();$('iState').textContent='SAVAŞ MODU';
-    // Mark moduna geçiş: mavi -> kırmızı/altın
-    intro.classList.add('mk');flash(.5,500);tone(90,.6,.25,'sawtooth',45);thump(.6);
-    await step(650);
-    // Repulsör şarjı
-    intro.classList.add('charge');tone(180,1.4,.08,'sawtooth',2600);tone(360,1.4,.05,'sine',5200);buzz(1300);
-    await step(1400);intro.classList.remove('charge');
-    // Patlama
-    noise(1.8,.55,2400,50);tone(70,1.2,.9,'sine',28);shock();flash();buzz([80,40,120]);
-    intro.classList.add('logo');$('iState').textContent='ÇEVRİMİÇİ';
-    decode($('nm'),'BİLAL',1000);
-    await step(3400);
-    exit();
+    msg('ARK REAKTÖRÜ // ATEŞLEME');await step(650);
+    for(const[p,ms]of[[.55,55],[0,130],[.9,45],[0,280],[.3,70],[0,110],[1,40],[.15,90]]){S.power=p;if(p>0){zap();buzz(15);}await step(ms);}
+    stopHum=hum(4.4);tween('power',1,3600);tween('camT',1,4400);
+    await step(300);msg('J.A.R.V.I.S. ÇEVRİMİÇİ');
+    await step(1300);msg('REPULSÖRLER KALİBRE EDİLDİ');
+    await step(1300);msg('ZIRH BÜTÜNLÜĞÜ %100');
+    await step(1500);msg('ÇIKIŞ 3 GW // AŞIRI YÜK');
+    stopHum();tone(140,1.5,.12,'sawtooth',2400);tone(280,1.5,.06,'sine',4800);buzz(1400);
+    tween('power',2.4,1500,ein);await tween('dolly',1,1550,ein);if(done)return;
+    // beyaz patlama
+    noise(2.2,.6,3000,40);tone(65,1.6,.9,'sine',26);buzz([90,40,140]);
+    const fl=$('iFlash').animate([{opacity:1},{opacity:1,offset:.2},{opacity:0}],{duration:1900,easing:'ease-out',fill:'forwards'});
+    S.mode='logo';S.dolly=0;S.power=1.15;camera.rotation.z=0;sparks();tween('logo',1,6000,t=>t);
+    intro.classList.add('logo');msg('HOŞ GELDİNİZ, EFENDİM.');
+    await step(4200);exit();
   }catch(e){}
 }
-
 function exit(){
-  if(done&&intro.classList.contains('exit'))return;done=true;stopHum();
-  noise(1.2,.3,300,7000);tone(300,1,.06,'sine',2400);
-  intro.classList.add('exit');
-  document.body.classList.remove('booting');
-  setTimeout(()=>{fxOn=false;clearInterval(clock);clearInterval(sideTick);intro.remove();},1500);
+  if(intro.classList.contains('exit'))return;done=true;stopHum();
+  noise(1.3,.25,300,6000);intro.classList.add('exit');document.body.classList.remove('booting');
+  setTimeout(()=>{running=false;clearInterval(clock);clearInterval(pctTick);renderer.dispose();composer.dispose&&composer.dispose();intro.remove();},1300);
 }
-
 intro.addEventListener('click',boot);
 intro.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();boot();}});
-$('iSkip').addEventListener('click',e=>{e.stopPropagation();if(!AC)initAudio();exit();});
-})();
+$('iSkip').addEventListener('click',e=>{e.stopPropagation();exit();});
 </script>
 <script>
 const yes=document.getElementById('yes');
