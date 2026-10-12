@@ -1,0 +1,23 @@
+﻿J.A.R.V.I.S. ACILIS EKRANI
+==========================
+
+Windows'ta oturum actiginda Iron Man tarzi 3D ark reaktoru acilisini
+tam ekran ve sesli oynatir, yaklasik 14 saniye sonra kendini kapatir.
+Internet gerekmez; her sey jarvis-acilis.html dosyasinin icinde.
+
+KURULUM
+  1. Klasoru bir yere cikart (ZIP icinden calistirma).
+  2. KUR.bat dosyasina cift tikla.
+     - Dosyalar %LOCALAPPDATA%\JarvisAcilis klasorune kopyalanir.
+     - Baslangic klasorune "JARVIS Acilis" kisayolu eklenir.
+     - Bir kez hemen denenir.
+  3. Windows "Bilinmeyen yayinci" uyarisi verirse: "Ek bilgi" > "Yine de calistir".
+
+DENEMEK ICIN  : DENE.bat
+KALDIRMAK ICIN: KALDIR.bat
+ATLAMAK ICIN  : animasyon sirasinda herhangi bir tusa bas ya da tikla.
+
+GEREKSINIM: Microsoft Edge (Windows 10/11'de hazir gelir).
+
+NOT: Bu, Windows'un kendi yukleme ekranini (logo + donen noktalar) degistirmez.
+Oturum acildiktan hemen sonra, masaustu gelmeden onune oynar.
