@@ -2,40 +2,18 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>Sinem ❤️ Bilal – Aşkın Başlangıcı</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#020407" />
+<title>BİLAL — J.A.R.V.I.S.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    height:100vh;overflow:hidden;font-family:'Poppins',sans-serif;color:#fff;
-    background:linear-gradient(180deg,#2b0038 0%,#0a0012 80%);
-  }
-  .bg{position:fixed;inset:0;background:url('YOUR_CAT_IMAGE_URL') center/cover no-repeat;filter:brightness(.6) blur(2px);z-index:-2;transition:transform 3s ease;}
-  .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);z-index:-1;}
-  .content{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;animation:fadeIn 2s ease forwards;}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(-40px);}to{opacity:1;transform:translateY(0);}}
-  h1{font-size:clamp(2rem,6vw,3.5rem);text-shadow:0 0 25px rgba(255,255,255,.5);}
-  p{margin-top:10px;font-size:1rem;color:#ddd;max-width:90%;}
-  .btns{margin-top:40px;display:flex;gap:20px;position:relative;width:90vw;height:70vh;border:none;justify-content:center;align-items:center;overflow:hidden;}
-  button{padding:14px 28px;border:none;border-radius:40px;cursor:pointer;font-size:1.3rem;transition:.2s;box-shadow:0 5px 20px rgba(0,0,0,.3);position:absolute;}
-  .yes{background:linear-gradient(45deg,#ff99b4,#ffe4f0);color:#111;font-weight:700;z-index:2;}
-  .yes:hover{transform:scale(1.05);}
-  .no{background:linear-gradient(45deg,#ff0000,#ff8c00);color:#fff;font-weight:bold;text-transform:uppercase;border:none;animation:glow 1s infinite alternate;z-index:2;}
-  @keyframes glow{0%{box-shadow:0 0 10px #ff0000;}100%{box-shadow:0 0 40px #ff8c00;}}
-  .loveMsg{display:none;flex-direction:column;align-items:center;justify-content:center;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:10;animation:fadeIn 1s ease forwards;}
-  .loveMsg h2{font-size:clamp(2.5rem,7vw,4.5rem);background:linear-gradient(90deg,#ffd1dc,#fff,#ffe07a);-webkit-background-clip:text;color:transparent;text-shadow:0 0 50px rgba(255,255,255,.6);}
-  .loveMsg p{margin-top:10px;color:#ffe4ec;}
-  canvas{position:fixed;inset:0;pointer-events:none;}
-  @media(max-width:600px){h1{font-size:1.8rem;}button{font-size:1rem;padding:10px 20px;}}
-
+  html,body{height:100%;background:#020407;overflow:hidden}
   /* ===== AÇILIŞ: 3D ARK REAKTÖRÜ ===== */
-  body.booting .content{animation:none;opacity:0}
   #intro{position:fixed;inset:0;z-index:100;background:#020407;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent;
-    user-select:none;font-family:'Chakra Petch',system-ui,sans-serif;color:#cfefff;transition:opacity 1.2s ease}
-  #intro.exit{opacity:0;pointer-events:none}
+    user-select:none;font-family:'Chakra Petch',system-ui,sans-serif;color:#cfefff;}
   #ir3d{position:absolute!important;inset:0;width:100%;height:100%;display:block;pointer-events:none}
   #intro .vig{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.88) 100%)}
   #intro .grain{position:absolute;inset:-50%;pointer-events:none;z-index:2;opacity:.06;animation:grain .5s steps(3) infinite;
@@ -57,7 +35,7 @@
   .tap i::after{content:"";position:absolute;inset:16px;border-radius:50%;background:#9ff6ff;box-shadow:0 0 12px #5ef2ff,0 0 28px #5ef2ff}
   @keyframes ping{0%{box-shadow:0 0 0 0 rgba(94,242,255,.45)}100%{box-shadow:0 0 0 28px rgba(94,242,255,0)}}
   #intro.live .tap{opacity:0;pointer-events:none}
-  .ilogo{position:absolute;left:0;right:0;top:64%;transform:translateY(-50%);z-index:3;text-align:center;pointer-events:none}
+  .ilogo{position:absolute;left:0;right:0;top:53.5%;z-index:3;text-align:center;pointer-events:none}
   .ilogo .nm{display:inline-block;font-weight:700;line-height:1;font-size:clamp(2.6rem,14vw,6.4rem);letter-spacing:.9em;margin-right:-.9em;
     background:linear-gradient(100deg,#4b535c 0%,#aab4be 28%,#fff 45%,#8ff5ff 50%,#fff 55%,#aab4be 72%,#4b535c 100%);
     background-size:280% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;
@@ -72,38 +50,46 @@
   #intro.logo .sub::before,#intro.logo .sub::after{transform:scaleX(1)}
   @keyframes sheen{from{background-position:100% 0}to{background-position:0 0}}
   @media(max-width:600px){.ibar{font-size:.52rem;letter-spacing:.12em}#iSkip{margin-left:10px}}
+  /* ===== ANA EKRAN ===== */
+  .ihome{margin-top:4.2vh;display:flex;flex-direction:column;align-items:center;gap:1.6vh;opacity:0;transform:translateY(12px);
+    transition:opacity 1s ease 1.6s,transform 1.2s cubic-bezier(.16,1,.3,1) 1.6s;pointer-events:none}
+  .ihome .greet{font-weight:600;font-size:clamp(.95rem,3.6vw,1.25rem);letter-spacing:.08em;color:#e8fbff}
+  .ihome .date{font:400 clamp(.6rem,2.2vw,.72rem)/1 'JetBrains Mono',monospace;letter-spacing:.25em;color:rgba(150,225,255,.6);text-transform:uppercase}
+  #iReplay{margin-top:1.4vh;background:none;border:1px solid rgba(120,220,255,.35);color:rgba(190,240,255,.85);cursor:pointer;
+    font:600 .62rem 'Chakra Petch',sans-serif;letter-spacing:.35em;padding:10px 18px;transition:border-color .3s,color .3s,box-shadow .3s}
+  #iReplay:hover{border-color:#7ff3ff;color:#fff;box-shadow:0 0 18px rgba(94,242,255,.35)}
+  #intro.home{cursor:default}
+  #intro.home .ihome{opacity:1;transform:none;pointer-events:auto}
+  #intro.home #iSkip{display:none}
+  #intro.nogl #ir3d{display:none}
+  #intro.nogl .ilogo{top:50%;transform:translateY(-50%)}
 </style>
 </head>
-<body class="booting">
+<body>
 <div id="intro" role="button" tabindex="0" aria-label="Başlatmak için dokun">
   <canvas id="ir3d"></canvas>
   <div class="vig"></div><div class="grain"></div>
-  <div class="ilogo"><div class="nm">BİLAL</div><div class="sub">MARK ∞ · ÇEVRİMİÇİ</div></div>
+  <div class="ilogo">
+    <div class="nm">BİLAL</div><div class="sub">MARK ∞ · ÇEVRİMİÇİ</div>
+    <div class="ihome"><div class="greet" id="iGreet">&nbsp;</div><div class="date" id="iDate">&nbsp;</div>
+      <button id="iReplay" type="button">↻ SİSTEMİ YENİDEN BAŞLAT</button></div>
+  </div>
   <div class="tap"><i></i>BAŞLAT</div>
   <div class="ibar t"><span>J.A.R.V.I.S.</span><span id="iClock">--:--:--</span></div>
   <div class="ibar b"><span id="iMsg">&nbsp;</span><span>GÜÇ <b id="iPct">000</b>%<button id="iSkip" type="button">ATLA ›</button></span></div>
   <div class="iflash" id="iFlash"></div>
 </div>
-<div class="bg" id="bg"></div>
-<div class="overlay"></div>
-<div class="content">
-  <h1>Sinem, bu kalp yalnız seninle ritim buluyor 💓</h1>
-  <p>Bir seçim yapmadan önce iyi düşün... Çünkü bu hikaye yalnızca "Evet" diyene açılacak 💫</p>
-  <div class="btns" id="box">
-    <button class="yes" id="yes">Evet, Aşkı Başlat 💖</button>
-    <button class="no" id="no">Hayır 😼</button>
-  </div>
-</div>
-<div class="loveMsg" id="loveMsg">
-  <h2>bn seni daha çok seviyorum 💋</h2>
-  <p>Kalpler, öpücükler ve kedicikler senin için yağıyor!</p>
-</div>
-<canvas id="canvas"></canvas>
-<audio id="music" src="https://dl.dropboxusercontent.com/scl/fi/k7grk2yq3y28c8n2l9bp9/Sezen-Aksu-Kaç-n-Kuras-.mp3?rlkey=6b2z5k1xzox8y9f2m9z0d6nuh&dl=0"></audio>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script>
-// 3D yüklenemezse açılış kendini kaldırır, sayfa yine açılır
-window.__introKill=function(){var i=document.getElementById('intro');if(i)i.remove();document.body.classList.remove('booting');};
+// J.A.R.V.I.S. selamlaması (saate göre)
+window.__greet=function(){var h=new Date().getHours(),g=h>=5&&h<12?'Günaydın, efendim.':h>=12&&h<18?'İyi günler, efendim.':h>=18&&h<23?'İyi akşamlar, efendim.':'Geç oldu efendim, biraz dinlenmelisiniz.';
+  document.getElementById('iGreet').textContent=g;
+  document.getElementById('iDate').textContent=new Date().toLocaleDateString('tr-TR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});};
+// 3D yüklenemezse doğrudan statik ana ekrana geç
+window.__introKill=function(){var i=document.getElementById('intro');i.className='live logo home nogl';i.removeAttribute('role');window.__greet();
+  document.getElementById('iMsg').textContent='TÜM SİSTEMLER NOMİNAL';document.getElementById('iPct').textContent='100';
+  document.getElementById('iReplay').onclick=function(){location.reload();};
+  var p=function(n){return String(n).padStart(2,'0')};setInterval(function(){var d=new Date();document.getElementById('iClock').textContent=p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());},250);};
 setTimeout(function(){if(!window.__introReady)window.__introKill();},10000);
 </script>
 <script type="module">
@@ -185,7 +171,7 @@ function frame(){if(!running)return;requestAnimationFrame(frame);const t=clk.get
   for(let i=tweens.length-1;i>=0;i--){const w=tweens[i],p=Math.min((now-w.t0)/w.dur,1);S[w.k]=lerp(w.from,w.to,w.ease(p));if(p>=1){tweens.splice(i,1);w.res();}}
   const P=S.power*flick*(1+Math.sin(t*31)*.015);
   glow.emissiveIntensity=P*1.05;coreM.emissiveIntensity=.15+P*3.4;light.intensity=P*9;bloom.strength=.15+Math.min(P,2.4)*.3;
-  const dt=t-lastT;lastT=t;if(S.mode==='logo')triA*=.9;else if(S.power>1.05)triA+=dt*(S.power-1)*7;
+  const dt=t-lastT;lastT=t;if(S.mode==='logo'){const k=Math.PI*2/3,tg=Math.round(triA/k)*k;triA=Math.abs(tg-triA)<.002?tg:triA+(tg-triA)*Math.min(1,dt*5);}else if(S.power>1.05)triA+=dt*(S.power-1)*7;
   tri.rotation.z=-Math.PI/2+triA;
   if(S.mode==='logo'){
     const w=innerWidth,h=innerHeight,D=Math.min(h*.26,w*.46),d=7.3*h/(.6306*D),vis=.6306*d;
@@ -227,10 +213,11 @@ const pctTick=setInterval(()=>{$('iPct').textContent=String(Math.round(Math.min(
 
 // --- Sekans ---
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-let started=false,done=false,stopHum=()=>{};
-const step=async ms=>{await sleep(ms);if(done)throw 0;};
+let started=false,done=false,run=0,stopHum=()=>{};
+let step;
 async function boot(){
-  if(started)return;started=true;initAudio();
+  if(started)return;started=true;if(!AC)initAudio();
+  const my=++run;step=async ms=>{await sleep(ms);if(done||my!==run)throw 0;};
   intro.classList.add('live');noise(.3,.45,2500,150);tone(150,.2,.22,'square',55);buzz(30);
   try{
     msg('ARK REAKTÖRÜ // ATEŞLEME');await step(650);
@@ -241,96 +228,32 @@ async function boot(){
     await step(1300);msg('ZIRH BÜTÜNLÜĞÜ %100');
     await step(1500);msg('ÇIKIŞ 3 GW // AŞIRI YÜK');
     stopHum();tone(140,1.5,.12,'sawtooth',2400);tone(280,1.5,.06,'sine',4800);buzz(1400);
-    tween('power',2.4,1500,ein);await tween('dolly',1,1550,ein);if(done)return;
+    tween('power',2.4,1500,ein);await tween('dolly',1,1550,ein);if(done||my!==run)return;
     // beyaz patlama
     noise(2.2,.6,3000,40);tone(65,1.6,.9,'sine',26);buzz([90,40,140]);
     const fl=$('iFlash').animate([{opacity:1},{opacity:1,offset:.2},{opacity:0}],{duration:1900,easing:'ease-out',fill:'forwards'});
     S.mode='logo';S.dolly=0;S.power=1.15;camera.rotation.z=0;sparks();tween('logo',1,6000,t=>t);
     intro.classList.add('logo');msg('HOŞ GELDİNİZ, EFENDİM.');
-    await step(4200);exit();
+    await step(2600);home(false);
   }catch(e){}
 }
-function exit(){
-  if(intro.classList.contains('exit'))return;done=true;stopHum();
-  noise(1.3,.25,300,6000);intro.classList.add('exit');document.body.classList.remove('booting');
-  setTimeout(()=>{running=false;clearInterval(clock);clearInterval(pctTick);renderer.dispose();composer.dispose&&composer.dispose();intro.remove();},1300);
+function home(skipped){
+  if(intro.classList.contains('home'))return;done=true;stopHum();tweens.length=0;
+  if(skipped){$('iFlash').animate([{opacity:.85},{opacity:0}],{duration:900,easing:'ease-out'});S.dolly=0;S.camT=1;camera.rotation.z=0;S.logo=0;tween('logo',1,6000,t=>t);}
+  S.mode='logo';S.power=1.15;
+  intro.classList.add('live','logo','home');intro.removeAttribute('role');window.__greet();
+  msgTok++;msg('TÜM SİSTEMLER NOMİNAL');
 }
-intro.addEventListener('click',boot);
-intro.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();boot();}});
-$('iSkip').addEventListener('click',e=>{e.stopPropagation();exit();});
-</script>
-<script>
-const yes=document.getElementById('yes');
-const no=document.getElementById('no');
-const msg=document.getElementById('loveMsg');
-const canvas=document.getElementById('canvas');
-const ctx=canvas.getContext('2d');
-const bg=document.getElementById('bg');
-const music=document.getElementById('music');
-const box=document.getElementById('box');
-let W=canvas.width=innerWidth,H=canvas.height=innerHeight;
-let hearts=[];
-
-function createHeart(){
-  const icons=['💖','💋','🐱'];
-  const icon=icons[Math.floor(Math.random()*icons.length)];
-  return{x:Math.random()*W,y:-20,s:Math.random()*24+20,vy:Math.random()*5+2,a:1,t:icon};
+function replay(){
+  run++;done=false;started=false;msgTok++;tweens.length=0;triA=0;
+  Object.assign(S,{power:0,camT:0,dolly:0,logo:0,mode:'boot'});camera.rotation.z=0;R.position.set(0,0,0);R.rotation.set(0,0,0);
+  intro.className='live';$('iMsg').innerHTML='&nbsp;';
+  boot();
 }
-
-function draw(){
-  ctx.clearRect(0,0,W,H);
-  hearts.forEach(h=>{
-    h.y+=h.vy;h.a-=0.003;
-    ctx.globalAlpha=h.a;
-    ctx.font=h.s+'px serif';
-    ctx.fillText(h.t,h.x,h.y);
-  });
-  hearts=hearts.filter(h=>h.y<H && h.a>0);
-  requestAnimationFrame(draw);
-}
-
-draw();
-
-function burst(n=200){
-  for(let i=0;i<n;i++)hearts.push(createHeart());
-}
-
-let musicStarted=false;
-yes.addEventListener('click',()=>{
-  if(!musicStarted){
-    music.play();
-    musicStarted=true;
-    setTimeout(()=>{music.pause();},20000);
-  }
-  msg.style.display='flex';
-  burst(400);
-  bg.style.transform='scale(1.1)';
-  if(navigator.vibrate)navigator.vibrate([40,20,40]);
-  setTimeout(()=>{msg.style.display='none';bg.style.transform='scale(1)';},20000);
-});
-
-// Hayır görünmez büyük kare içinde çok hızlı kaçıyor
-function moveNo(e){
-  const boxRect=box.getBoundingClientRect();
-  const rect=no.getBoundingClientRect();
-  const dx=e.clientX - (rect.left + rect.width/2);
-  const dy=e.clientY - (rect.top + rect.height/2);
-  const dist=Math.sqrt(dx*dx + dy*dy);
-  if(dist<150){
-    const angle=Math.atan2(dy,dx);
-    const offset=180; // Daha hızlı kaçış
-    let newX=rect.left - Math.cos(angle)*offset - boxRect.left;
-    let newY=rect.top - Math.sin(angle)*offset - boxRect.top;
-    newX=Math.min(Math.max(newX,0),boxRect.width-rect.width);
-    newY=Math.min(Math.max(newY,0),boxRect.height-rect.height);
-    no.style.left=newX+'px';
-    no.style.top=newY+'px';
-  }
-}
-
-box.addEventListener('mousemove',moveNo);
-window.addEventListener('resize',()=>{W=canvas.width=innerWidth;H=canvas.height=innerHeight;});
-setInterval(()=>{if(musicStarted)hearts.push(createHeart());},60);
+intro.addEventListener('click',()=>{if(!intro.classList.contains('home'))boot();});
+intro.addEventListener('keydown',e=>{if(!started&&(e.key==='Enter'||e.key===' ')){e.preventDefault();boot();}});
+$('iSkip').addEventListener('click',e=>{e.stopPropagation();home(true);});
+$('iReplay').addEventListener('click',e=>{e.stopPropagation();replay();});
 </script>
 </body>
 </html>
