@@ -77,15 +77,18 @@
   .arc .ringTxt{fill:var(--c);font:600 13px 'Chakra Petch',sans-serif;letter-spacing:6px;opacity:.75}
   .arc .coil{stroke-opacity:.5}
   .arc .tri{transition:transform .6s cubic-bezier(.6,-0.4,.7,1),opacity .5s}
-  .arc .heart{transform-origin:0 0;transform:scale(0);opacity:0}
-  .arc .heart path{fill:url(#heartG)}
-  #intro.mk .tri{transform:scale(0) rotate(180deg);opacity:0}
-  #intro.mk .heart{opacity:1;animation:heartIn .7s cubic-bezier(.2,1.8,.4,1) forwards,beat .9s ease-in-out .7s infinite}
-  @keyframes heartIn{from{transform:scale(0) rotate(-30deg)}to{transform:scale(1) rotate(0)}}
-  @keyframes beat{0%,100%{transform:scale(1)}12%{transform:scale(1.16)}24%{transform:scale(1.02)}36%{transform:scale(1.12)}55%{transform:scale(1)}}
+  .arc .tri{transform-origin:0 0}
+  .arc .triFill{fill:url(#triG);opacity:0;transition:opacity .5s}
+  #intro.mk .triFill{opacity:.9}
+  #intro.mk .tri{animation:triKick .6s cubic-bezier(.2,1.8,.4,1)}
+  @keyframes triKick{0%{transform:scale(1)}35%{transform:scale(1.22) rotate(-8deg)}100%{transform:scale(1)}}
+  #intro.charge .tri{animation:triShake .08s linear infinite}
+  @keyframes triShake{50%{transform:translate(1.5px,-1px) scale(1.03)}}
   .arc .core{transform-origin:0 0}
-  #intro.mk .core{animation:corePulse .9s ease-in-out infinite}
-  @keyframes corePulse{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}35%{transform:scale(1.15)}}
+  #intro.charge .core{animation:charge 1.4s cubic-bezier(.6,0,.9,.6) forwards}
+  @keyframes charge{to{transform:scale(1.9)}}
+  #intro.logo .core{animation:idleCore 2.4s ease-in-out infinite}
+  @keyframes idleCore{50%{transform:scale(1.12)}}
 
   .ret{position:absolute;inset:-7%;opacity:0;transform:scale(1.5) rotate(45deg);transition:transform .7s cubic-bezier(.2,1.3,.4,1),opacity .4s;pointer-events:none}
   .ret i{position:absolute;width:16%;height:16%;border:2px solid var(--c)}
@@ -132,25 +135,31 @@
   #intro.live .skip{opacity:.65;pointer-events:auto}
   .skip:hover{opacity:1!important}
 
-  .nm{position:absolute;top:50%;transform:translateY(-50%);z-index:3;
-    font-weight:700;font-size:clamp(1.15rem,6.4vw,3.4rem);letter-spacing:.14em;color:#fff6ea;white-space:nowrap;
-    text-shadow:0 0 10px var(--c),0 0 28px var(--c),0 0 60px color-mix(in srgb,var(--c) 60%,transparent);
-    opacity:0;filter:blur(8px);transition:opacity .6s ease,filter .8s ease}
-  .nm.l{right:calc(50% + var(--rs)*.25 + 4px)}
-  .nm.r{left:calc(50% + var(--rs)*.25 + 4px);margin-right:-.14em}
-  .sub{position:absolute;left:50%;top:calc(50% + var(--rs)*.3);transform:translateX(-50%);z-index:3;white-space:nowrap;
-    display:flex;align-items:center;gap:14px;font-weight:600;font-size:clamp(.6rem,2.4vw,.9rem);letter-spacing:.45em;color:var(--c2);opacity:0;transition:opacity .8s ease .5s}
-  .sub::before,.sub::after{content:"";height:1px;width:min(18vw,120px);background:linear-gradient(90deg,transparent,var(--c));transform:scaleX(0);transition:transform 1s cubic-bezier(.2,1,.3,1) .6s}
+  .nm{position:absolute;left:50%;top:64%;transform:translate(-50%,-50%);z-index:3;white-space:nowrap;
+    font-weight:700;font-size:clamp(2rem,12vw,4.6rem);letter-spacing:.32em;margin-right:-.32em;line-height:1;
+    background:linear-gradient(100deg,#6d0b14 0%,#d61f33 28%,#ffd98a 46%,#fff 50%,#ffd98a 54%,#d61f33 72%,#6d0b14 100%);
+    background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 10px color-mix(in srgb,var(--c) 70%,transparent)) blur(10px);opacity:0;
+    transition:opacity .5s ease,filter .9s ease}
+  .sub{position:absolute;left:50%;top:calc(64% + clamp(2rem,12vw,4.6rem)*.75);transform:translateX(-50%);z-index:3;white-space:nowrap;
+    display:flex;align-items:center;gap:14px;font-weight:600;font-size:clamp(.58rem,2.3vw,.85rem);letter-spacing:.5em;color:var(--c2);opacity:0;transition:opacity .8s ease .6s}
+  .sub::before,.sub::after{content:"";height:1px;width:min(16vw,110px);background:linear-gradient(90deg,transparent,var(--c));transform:scaleX(0);transition:transform 1s cubic-bezier(.2,1,.3,1) .7s}
   .sub::before{transform-origin:right}.sub::after{background:linear-gradient(270deg,transparent,var(--c));transform-origin:left}
-  #intro.logo .arcwrap{transform:scale(.46)}
+  @keyframes sheen{from{background-position:100% 0}to{background-position:0 0}}
+  #intro.logo .arcwrap{transform:translateY(-17%) scale(.44)}
   #intro.logo .ret,#intro.logo .hud,#intro.logo .side,#intro.logo .skip{opacity:0!important;pointer-events:none}
-  #intro.logo .nm{opacity:1;filter:blur(0)}
+  #intro.logo .nm{opacity:1;filter:drop-shadow(0 0 10px color-mix(in srgb,var(--c) 70%,transparent)) blur(0);animation:sheen 2.2s cubic-bezier(.5,0,.3,1) .2s forwards}
   #intro.logo .sub{opacity:1}
   #intro.logo .sub::before,#intro.logo .sub::after{transform:scaleX(1)}
   #intro.exit{opacity:0;pointer-events:none}
   #intro.exit .arcwrap{transform:scale(9);opacity:0;transition:transform 1.2s cubic-bezier(.7,0,.3,1),opacity .8s ease .4s}
-  #intro.exit .nm.l{transform:translate(-40vw,-50%);opacity:0;transition:transform 1s cubic-bezier(.7,0,.3,1),opacity .6s}
-  #intro.exit .nm.r{transform:translate(40vw,-50%);opacity:0;transition:transform 1s cubic-bezier(.7,0,.3,1),opacity .6s}
+  #intro.exit .nm,#intro.exit .sub{opacity:0;transition:opacity .5s}
+  /* vizör: kask kapanma efekti */
+  .lid{position:absolute;left:0;right:0;height:50%;z-index:6;background:linear-gradient(#0b0d10,#15181d);pointer-events:none;
+    transition:transform .32s cubic-bezier(.8,0,.6,1)}
+  .lid.t{top:0;transform:translateY(-101%);border-bottom:2px solid var(--c);box-shadow:0 6px 30px color-mix(in srgb,var(--c) 60%,transparent)}
+  .lid.b{bottom:0;transform:translateY(101%);border-top:2px solid var(--c);box-shadow:0 -6px 30px color-mix(in srgb,var(--c) 60%,transparent)}
+  #intro.visor .lid{transform:none}
   @media(max-width:820px){.side{display:none}}
   @media(max-width:600px){.hc{font-size:.56rem}.hc.bl,.hc.br{display:none}.skip{bottom:20px}}
   @media(max-height:560px){.log{height:4em}.tap{bottom:6vh}}
@@ -160,10 +169,10 @@
 <div id="intro" role="button" tabindex="0" aria-label="Sistemi başlatmak için dokun">
   <canvas id="introFx"></canvas>
   <div class="i-flash" id="iFlash"></div>
-  <div class="hc tl">J.A.R.V.I.S. // AŞK PROTOKOLÜ<br>SİSTEM: <span id="iState">UYKU MODU</span></div>
-  <div class="hc tr"><span id="iClock">--:--:--</span><br>MARK ∞</div>
-  <div class="hc bl">KONUM: KALBİN TAM ORTASI<br>ENERJİ KAYNAĞI: SİNEM</div>
-  <div class="hc br">S ❤ B INDUSTRIES<br>v14.02</div>
+  <div class="hc tl">J.A.R.V.I.S. // MARK ∞<br>SİSTEM: <span id="iState">UYKU MODU</span></div>
+  <div class="hc tr"><span id="iClock">--:--:--</span><br>İRTİFA 0000 M</div>
+  <div class="hc bl">ZIRH: <span id="iArmor">BEKLEMEDE</span><br>REPULSÖR: <span id="iRep">KAPALI</span></div>
+  <div class="hc br">B INDUSTRIES<br>BUILD 3000</div>
   <div class="side l" id="sideL"></div>
   <div class="side r" id="sideR"></div>
 
@@ -172,24 +181,22 @@
       <svg class="arc" viewBox="-215 -215 430 430" aria-hidden="true">
         <defs>
           <radialGradient id="coreG"><stop offset="0" stop-color="#fff"/><stop offset=".3" class="sc2"/><stop offset=".65" class="sc" stop-opacity=".8"/><stop offset="1" class="sc" stop-opacity="0"/></radialGradient>
-          <linearGradient id="heartG" x1="0" y1="-1" x2="0" y2="1"><stop offset="0" stop-color="#fff3d1"/><stop offset=".45" class="sc2"/><stop offset="1" class="sc"/></linearGradient>
+          <radialGradient id="triG"><stop offset="0" stop-color="#fff"/><stop offset=".45" class="sc2"/><stop offset="1" class="sc" stop-opacity=".25"/></radialGradient>
           <path id="txtRing" d="M0,-199 A199,199 0 1,1 -.1,-199"/>
         </defs>
-        <g class="L"><g class="spin s1"><text class="ringTxt"><textPath href="#txtRing">ARK REAKTÖRÜ · MARK ∞ · SİNEM ❤ BİLAL · KALP ÇEKİRDEĞİ · ARK REAKTÖRÜ · MARK ∞ · SİNEM ❤ BİLAL · KALP ÇEKİRDEĞİ ·</textPath></text></g></g>
+        <g class="L"><g class="spin s1"><text class="ringTxt"><textPath href="#txtRing">ARK REAKTÖRÜ · MARK ∞ · J.A.R.V.I.S. · ÇIKIŞ 3 GW · ARK REAKTÖRÜ · MARK ∞ · J.A.R.V.I.S. · ÇIKIŞ 3 GW ·</textPath></text></g></g>
         <g class="L"><g class="spin s2"><circle r="182" class="st" stroke-width="3" stroke-dasharray="130 26 16 26"/></g></g>
         <g class="L"><g class="spin s3"><circle r="166" class="st" stroke-width="10" stroke-dasharray="1.6 15.78" opacity=".75"/></g></g>
         <g class="L"><circle r="148" class="st" stroke-width="2" opacity=".6"/><circle r="106" class="st" stroke-width="4"/></g>
         <g class="L"><g class="spin s4"><circle r="127" class="st coil" stroke-width="34" stroke-dasharray="64.4 15.4"/><circle r="127" class="st" stroke-width="2" stroke-dasharray="64.4 15.4"/></g></g>
         <g class="L"><g class="spin s5"><circle r="90" class="st" stroke-width="2" stroke-dasharray="5 9"/></g></g>
         <g class="L core"><circle r="66" fill="url(#coreG)"/></g>
-        <g class="L tri"><path d="M0,80 L-69,-40 L69,-40 Z" class="st" stroke-width="7" stroke-linejoin="round"/><path d="M0,52 L-45,-26 L45,-26 Z" class="st" stroke-width="2" opacity=".7"/></g>
-        <g class="heart"><path transform="translate(0,12)" d="M0,50 C-32,28 -74,2 -74,-30 C-74,-57 -45,-72 -23,-60 C-11,-53 -3,-43 0,-35 C3,-43 11,-53 23,-60 C45,-72 74,-57 74,-30 C74,2 32,28 0,50 Z"/></g>
+        <g class="L tri"><path class="triFill" d="M0,52 L-45,-26 L45,-26 Z"/><path d="M0,80 L-69,-40 L69,-40 Z" class="st" stroke-width="7" stroke-linejoin="round"/><path d="M0,52 L-45,-26 L45,-26 Z" class="st" stroke-width="2" opacity=".7"/></g>
       </svg>
       <div class="ret"><i></i><i></i><i></i><i></i></div>
     </div>
-    <div class="nm l" id="nmL">SİNEM</div>
-    <div class="nm r" id="nmR">BİLAL</div>
-    <div class="sub">AŞK PROTOKOLÜ</div>
+    <div class="nm" id="nm">BİLAL</div>
+    <div class="sub">MARK ∞ · ÇEVRİMİÇİ</div>
   </div>
 
   <div class="hud">
@@ -198,6 +205,7 @@
   </div>
   <div class="tap">[ SİSTEMİ BAŞLATMAK İÇİN DOKUN ]</div>
   <button class="skip" id="iSkip" type="button">ATLA ›</button>
+  <div class="lid t"></div><div class="lid b"></div>
 </div>
 <div class="bg" id="bg"></div>
 <div class="overlay"></div>
@@ -279,33 +287,38 @@ function shock(){const[cx,cy]=center(),cols=['#ff2d46','#ffcf5a','#fff3d1','#ff7
 const flash=(o=.95,d=800)=>$('iFlash').animate([{opacity:o},{opacity:0}],{duration:d,easing:'ease-out'});
 
 // --- Sekans ---
-const LINES=[['> J.A.R.V.I.S. çevrimiçi'],['> Ark reaktörü ateşleniyor…'],['> Zırh sistemleri: %100 hazır'],['> Hedef taranıyor…','scan'],
-  ['> Hedef kilitlendi: SİNEM ❤','lock'],['> Kalp ritmi senkronize ediliyor…'],['> AŞK PROTOKOLÜ YETKİLENDİRİLDİ','ok']];
+const LINES=[['> J.A.R.V.I.S. çevrimiçi'],['> Ark reaktörü ateşleniyor…'],['> Repulsörler kalibre ediliyor…','rep'],['> Zırh bütünlüğü: %100','armor'],
+  ['> Biyometrik tarama…','scan'],['> Kimlik doğrulandı: BİLAL','lock'],['> Hoş geldiniz, efendim.','ok']];
 
 async function boot(){
   if(started)return;started=true;initAudio();
-  intro.classList.add('live');$('iState').textContent='BAŞLATILIYOR';
-  stopHum=hum(5.2);buzz(30);
+  // vizör kapanır -> açılır, HUD yanar
+  intro.classList.add('visor');noise(.25,.5,3000,200);tone(160,.18,.25,'square',60);buzz(40);
+  await sleep(420);if(done)return;intro.classList.add('live');intro.classList.remove('visor');
+  $('iState').textContent='BAŞLATILIYOR';stopHum=hum(5.2);
   layers.forEach((l,i)=>setTimeout(()=>{if(done)return;l.classList.add('on');tone(400+i*160,.07,.03,'triangle');},120+i*380));
   try{
     const pw=power(5200);
     for(const[t,c]of LINES){
       if(c==='scan')intro.classList.add('scan');
+      if(c==='rep')$('iRep').textContent='HAZIR';
+      if(c==='armor')$('iArmor').textContent='AKTİF';
       if(c==='lock'){intro.classList.remove('scan');intro.classList.add('lock');tone(2200,.15,.05);buzz([20,30,20]);}
       await typeLine(t,c==='ok'?'ok':'');await step(c==='ok'?0:160);
     }
     await pw;if(done)return;
-    stopHum();$('iState').textContent='KALP MODU';
-    // Mark moduna geçiş: mavi -> kırmızı/altın, üçgen -> kalp
-    intro.classList.add('mk');flash(.5,500);tone(90,.6,.25,'sawtooth',45);
-    await step(700);
-    for(let i=0;i<2;i++){thump();buzz(40);await step(190);thump(.5);buzz(25);await step(710);}
+    stopHum();$('iState').textContent='SAVAŞ MODU';
+    // Mark moduna geçiş: mavi -> kırmızı/altın
+    intro.classList.add('mk');flash(.5,500);tone(90,.6,.25,'sawtooth',45);thump(.6);
+    await step(650);
+    // Repulsör şarjı
+    intro.classList.add('charge');tone(180,1.4,.08,'sawtooth',2600);tone(360,1.4,.05,'sine',5200);buzz(1300);
+    await step(1400);intro.classList.remove('charge');
     // Patlama
     noise(1.8,.55,2400,50);tone(70,1.2,.9,'sine',28);shock();flash();buzz([80,40,120]);
     intro.classList.add('logo');$('iState').textContent='ÇEVRİMİÇİ';
-    decode($('nmL'),'SİNEM',900);decode($('nmR'),'BİLAL',900);
-    (async()=>{try{for(let i=0;i<4;i++){await step(900);thump(.45);await step(190);thump(.25);}}catch(e){}})();
-    await step(3300);
+    decode($('nm'),'BİLAL',1000);
+    await step(3400);
     exit();
   }catch(e){}
 }
@@ -315,7 +328,6 @@ function exit(){
   noise(1.2,.3,300,7000);tone(300,1,.06,'sine',2400);
   intro.classList.add('exit');
   document.body.classList.remove('booting');
-  if(typeof burst==='function')setTimeout(()=>burst(90),300);
   setTimeout(()=>{fxOn=false;clearInterval(clock);clearInterval(sideTick);intro.remove();},1500);
 }
 
